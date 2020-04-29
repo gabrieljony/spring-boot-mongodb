@@ -16,4 +16,7 @@ public interface PostRepository extends MongoRepository<Post, String> {
 //    https://docs.mongodb.com/manual/reference/operator/query/regex/
     @Query("{ 'title': { $regex: ?0, $options: 'i' } }")
     List<Post> searchTitle(String text);
+
+    @Query("{ $and: [ {date: {$gte: ?1} }, {date: { $lte: ?2} }, { $or: [ { 'title': { $regex: ?0, $options: 'i' } }, { 'description': { $regex: ?0, $options: 'i' } }, { 'commentDTOList.text': { $regex: ?0, $options: 'i' } } ] } ] }")
+    List<Post> fullSearch(String text, Long minDate, Long maxDate);
 }

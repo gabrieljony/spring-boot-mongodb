@@ -48,4 +48,17 @@ public class PostController {
         List<Post> list = postService.searchTitle(text);
         return ResponseEntity.ok().body(list);
     }
+
+    @RequestMapping(value = "/fullsearch", method = RequestMethod.GET)
+    public ResponseEntity<List<Post>> fullSearch(
+            @RequestParam(value = "text", defaultValue = "") String text,
+            @RequestParam(value = "minDate", defaultValue = "") Long minDate,
+            @RequestParam(value = "maxDate", defaultValue = "") Long maxDate
+            ){
+        text = URL.decodeParam(text);
+//        minDate
+//        maxDate
+        List<Post> list = postService.fullSearch(text, minDate, maxDate);
+        return ResponseEntity.ok().body(list);
+    }
 }

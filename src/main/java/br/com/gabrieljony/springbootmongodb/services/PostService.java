@@ -34,4 +34,10 @@ public class PostService {
     public List<Post> searchTitle(String text) {
         return postRepository.searchTitle(text);
     }
+
+    public List<Post> fullSearch(String text, Long minDate, Long maxDate) {
+//        mimDate...
+//        maxDate...
+        return postRepository.fullSearch(text, minDate, maxDate);
+    }
 }
