@@ -1,5 +1,6 @@
 package br.com.gabrieljony.springbootmongodb.controller;
 
+import br.com.gabrieljony.springbootmongodb.domain.Post;
 import br.com.gabrieljony.springbootmongodb.domain.User;
 import br.com.gabrieljony.springbootmongodb.dto.UserDTO;
 import br.com.gabrieljony.springbootmongodb.services.UserService;
@@ -52,7 +53,12 @@ public class UserController {
         obj.setId(id);
         userService.update(obj);
         return ResponseEntity.noContent().build();
+    }
 
+    @RequestMapping(value = "/{id}/posts", method = RequestMethod.GET)
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id){
+        User obj = userService.findById(id);
+        return ResponseEntity.ok().body(obj.getPosts());
     }
 
 }
